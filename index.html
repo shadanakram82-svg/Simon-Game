@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simon Says Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Simon Says Game </h1>
-    <h2>Press any key to start</h2>
+    <main class="game-shell">
+        <header class="game-header">
+            <h1>Simon Says Game</h1>
+            <h2 id="status-text">Press any key or tap Start</h2>
+            <button class="start-btn" id="start-btn" type="button">Start Game</button>
+        </header>
 
-    <div class="btn-container">
-        <div class="line-1">
-         <div class="btn red" type = "button" id="red"></div>
-        <div class="btn blue" type = "button" id="blue"></div>
-    </div>
-       <div class="line-2">    
-        <div class="btn green" type ="btton" id="green"></div>
-        <div class="btn grey" type = "button" id="grey"></div>
-    </div>
-    
-    </div>
+        <section class="btn-container" aria-label="Simon game board">
+            <button class="btn red" type="button" id="red" aria-label="Red button"></button>
+            <button class="btn blue" type="button" id="blue" aria-label="Blue button"></button>
+            <button class="btn green" type="button" id="green" aria-label="Green button"></button>
+            <button class="btn grey" type="button" id="grey" aria-label="Grey button"></button>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>

@@ -1,22 +1,32 @@
 let gameSeq = [];
 let userSeq = [];
 
-let btns = ["red" , "blue" , "green" ,"grey"]
+let btns = ["red", "blue", "green", "grey"];
 
 let started = false;
 let level = 0;
 
-let h2 = document.querySelector("h2");
+const h2 = document.querySelector("#status-text");
+const startBtn = document.querySelector("#start-btn");
 
-document.addEventListener("keypress", function (){
-  if(started == false){
-    console.log("Game is started")
+function setStartButtonState(isRunning) {
+    startBtn.disabled = isRunning;
+    startBtn.innerText = isRunning ? "Game Running" : "Start Game";
+}
+
+function startGame() {
+    if (started) {
+        return;
+    }
+
+    console.log("Game is started");
     started = true;
-
+    setStartButtonState(true);
     levelup();
-  }
+}
 
-}); 
+document.addEventListener("keydown", startGame);
+startBtn.addEventListener("click", startGame);
 
 function gameflash(btn){
     btn.classList.add("flash")
@@ -35,9 +45,9 @@ function userflash(btn){
 function levelup(){
     userSeq = [];
     level++;
-    h2.innerText = `Level ${level}` ;
+    h2.innerText = `Level ${level}`;
     
-    let randInd = Math.floor(Math.random() *3);
+    let randInd = Math.floor(Math.random() * 4);
     let randcolor = btns[randInd];
     let randbtn = document.querySelector(`.${randcolor}`);
 
@@ -58,10 +68,10 @@ function checkAns(idx){
         }
     }
     else{
-        h2.innerHTML = `Game Over!Your score was <b>${level} </b> <br> Press any key to start.`;
-        document.querySelector("body").style.backgroundColor = "red";
+        h2.innerHTML = `Game Over! Your score was <b>${level}</b><br>Tap Start or press any key to play again.`;
+        document.body.classList.add("game-over");
         setTimeout(function (){
-            document.querySelector("body").style.backgroundColor = "white";
+            document.body.classList.remove("game-over");
         },200);
         reset();
     }
@@ -73,7 +83,7 @@ function btnPress(){
     let btn = this;
      userflash(btn);
 
-     usercolor = btn.getAttribute("id");
+     let usercolor = btn.getAttribute("id");
      userSeq.push(usercolor);
 
      checkAns(userSeq.length-1);
@@ -90,5 +100,6 @@ function reset(){
     gameSeq = [];
     userSeq = [];
     level = 0;
+    setStartButtonState(false);
 }
  
